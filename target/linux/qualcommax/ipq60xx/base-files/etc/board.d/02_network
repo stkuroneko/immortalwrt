@@ -33,6 +33,7 @@ ipq60xx_setup_interfaces()
 	anysafe,e1|\
 	cmiot,ax18|\
 	jdcloud,re-ss-01|\
+	jdcloud,re-ss-01-spi|\
 	jdcloud,re-cs-07|\
 	redmi,ax5|\
 	redmi,ax5-jdcloud|\

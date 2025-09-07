@@ -335,6 +335,19 @@ define Device/jdcloud_re-ss-01
 endef
 TARGET_DEVICES += jdcloud_re-ss-01
 
+define Device/jdcloud_re-ss-01-spi
+	$(call Device/FitImageLzma)
+	DEVICE_VENDOR := JDCloud
+	DEVICE_MODEL := RE-SS-01-SPI
+	IMAGE_SIZE := 27776k
+	BLOCKSIZE := 64k
+	SOC := ipq6000
+	DEVICE_DTS_CONFIG := config@cp03-c1
+	IMAGE/sysupgrade.bin := append-kernel | pad-to 64k | append-rootfs | pad-rootfs | check-size | append-metadata
+	DEVICE_PACKAGES := ipq-wifi-jdcloud_re-ss-01-spi
+endef
+TARGET_DEVICES += jdcloud_re-ss-01-spi
+
 define Device/jdcloud_re-cs-02
 	$(call Device/FitImage)
 	$(call Device/EmmcImage)

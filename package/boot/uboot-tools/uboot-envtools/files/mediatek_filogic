@@ -97,7 +97,8 @@ zbtlink,zbt-z8102ax|\
 zbtlink,zbt-z8103ax)
 	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x20000" "0x20000"
 	;;
-comfast,cf-e393ax)
+comfast,cf-e393ax|\
+iptime,ax3000m)
 	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x20000" "0x80000"
 	;;
 dlink,aquila-pro-ai-m30-a1|\
@@ -137,8 +138,7 @@ ubnt,unifi-6-plus)
 	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x80000" "0x10000"
 	;;
 teltonika,rutc50)
-	local envdev=/dev/mtd$(find_mtd_index "u-boot-env")
-	ubootenv_add_uci_config "$envdev" "0x0" "0x10000" "0x10000"
+	ubootenv_add_mtd "u-boot-env" "0x0" "0x10000" "0x10000"
 	;;
 xiaomi,mi-router-ax3000t|\
 xiaomi,mi-router-wr30u-stock|\

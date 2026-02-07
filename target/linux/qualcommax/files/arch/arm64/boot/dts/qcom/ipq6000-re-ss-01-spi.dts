@@ -6,14 +6,15 @@
 #include "ipq6018-ess.dtsi"
 #include "ipq6018-nss.dtsi"
 #include "ipq6018-common.dtsi"
+#include "ipq6018-cp-cpu.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/leds/common.h>
 
 / {
-	model = "JDCloud RE-SS-01";
-	compatible = "jdcloud,re-ss-01", "qcom,ipq6018";
+	model = "JDCloud RE-SS-01-SPI";
+	compatible = "jdcloud,re-ss-01-spi", "qcom,ipq6018";
 
 	aliases {
 		serial0 = &blsp1_uart3;
@@ -52,17 +53,17 @@
 	leds {
 		compatible = "gpio-leds";
 
-		led_status_red: status-red {
+		led_status_red: red {
 			label = "red:status";
 			gpios = <&tlmm 37 GPIO_ACTIVE_HIGH>;
 		};
 
-		led_status_green: status-green {
+		led_status_green: green {
 			label = "green:status";
 			gpios = <&tlmm 50 GPIO_ACTIVE_HIGH>;
 		};
 
-		led_status_blue: status-blue {
+		led_status_blue: blue {
 			label = "blue:status";
 			gpios = <&tlmm 35 GPIO_ACTIVE_HIGH>;
 		};
@@ -87,6 +88,90 @@
 		#size-cells = <1>;
 		reg = <0>;
 
+		partitions {
+			compatible = "fixed-partitions";
+			#address-cells = <1>;
+			#size-cells = <1>;
+
+			partition@0 {
+				label = "0:SBL1";
+				reg = <0x00000000 0x000c0000>;
+			};
+
+			partition@c0000 {
+				label = "0:MIBIB";
+				reg = <0x000c0000 0x00010000>;
+			};
+
+			partition@d0000 {
+				label = "0:QSEE";
+				reg = <0x000d0000 0x001a0000>;
+			};
+
+			partition@270000 {
+				label = "0:DEVCFG";
+				reg = <0x00270000 0x00010000>;
+			};
+
+			partition@280000 {
+				label = "0:RPM";
+				reg = <0x00280000 0x00020000>;
+			};
+
+			partition@2a0000 {
+				label = "0:CDT";
+				reg = <0x002a0000 0x00010000>;
+			};
+
+			partition@2b0000 {
+				label = "0:APPSBLENV";
+				reg = <0x002b0000 0x00010000>;
+			};
+
+			partition@2c0000 {
+				label = "0:APPSBL";
+				reg = <0x002c0000 0x000a0000>;
+			};
+
+			partition@360000 {
+				label = "0:ART";
+				reg = <0x00360000 0x00040000>;
+
+				nvmem-layout {
+					compatible = "fixed-layout";
+					#address-cells = <1>;
+					#size-cells = <1>;
+
+					macaddr_eth0: macaddr@0 {
+						reg = <0x00 0x06>;
+					};
+
+					macaddr_eth1: macaddr@6 {
+						reg = <0x06 0x06>;
+					};
+
+					macaddr_eth2: macaddr@c {
+						reg = <0x0c 0x06>;
+					};
+				};
+			};
+
+			partition@3a0000 {
+				label = "config";
+				reg = <0x003a0000 0x00040000>;
+			};
+
+			partition@3e0000 {
+				label = "data";
+				reg = <0x003e0000 0x00100000>;
+			};
+
+			partition@4e0000 {
+				label = "firmware";
+				compatible = "denx,fit";
+				reg = <0x004e0000 0x01b20000>;
+			};
+		};
 	};
 };
 

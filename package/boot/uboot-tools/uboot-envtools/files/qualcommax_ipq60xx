@@ -12,6 +12,7 @@ anysafe,e1|\
 philips,ly1800|\
 sy,y6010|\
 8devices,mango-dvk|\
+jdcloud,re-ss-01-spi|\
 8devices,mango-dvk-sfp|\
 cambiumnetworks,xe3-4)
 	ubootenv_add_mtd "0:APPSBLENV" "0x0" "0x10000" "0x10000"

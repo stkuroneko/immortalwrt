@@ -13,8 +13,8 @@
 #include <dt-bindings/leds/common.h>
 
 / {
-	model = "Arcadyan AW1000";
-	compatible = "arcadyan,aw1000", "qcom,ipq8074";
+	model = "Queclink WR300FG";
+	compatible = "queclink,wr300fg", "qcom,ipq8074";
 
 	aliases {
 		serial0 = &blsp1_uart5;
@@ -234,6 +234,8 @@
 	};
 
 	nand@0 {
+		#address-cells = <1>;
+		#size-cells = <1>;
 		reg = <0>;
 
 		nand-ecc-strength = <8>;
@@ -417,5 +419,5 @@
 &wifi {
 	status = "okay";
 	qcom,ath11k-fw-memory-mode = <1>;
-	qcom,ath11k-calibration-variant = "Arcadyan-AW1000";
+	qcom,ath11k-calibration-variant = "Queclink-WR300FG";
 };
